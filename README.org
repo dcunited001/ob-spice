@@ -13,9 +13,9 @@ I put it in Org-mode contrib/ now.
 
 ** Example
 
-#+BEGIN_SRC org
-,#+BEGIN_SRC spice  :results drawer :exports both :var file="data/images/spice-example"
-,*Virtual Ground Test: opamp gain = 1000
+#+begin_example org
+#+BEGIN_SRC spice :tangle no :comments none :results drawer
+*Virtual Ground Test: opamp gain = 1000
 vin in 0 dc 0V sin(0 0.1 100Hz)
 r1 in inn 10k
 r2 inn out 10k
@@ -27,14 +27,11 @@ EOpamp out 0 0 inn 1000
 .control
 run
 set gnuplot_terminal=png
-gnuplot $file v(in) v(out) v(inn)
+*gnuplot $file v(in) v(out) v(inn)
+gnuplot img/spice/spice-example v(in) v(out) v(inn)
 .endc
-,#+END_SRC
-
-,#+RESULTS:
-:RESULTS:
-,#+ATTR_HTML: :width 600px
- [[file:./data/images/spice-example.png]]
-:END:
-
 #+END_SRC
+#+end_example
+
+**** TODO update =org-babel-expand-body:spice= to emulate =:shell=
++ [ ] can use =org-babel-expand-body:generic= but this doesn't handle variables
